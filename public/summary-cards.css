@@ -222,6 +222,11 @@
 .figma-link-form input { min-width: 0; border: 0; border-bottom: 1px solid #8d8d8d; background: #f4f4f4; padding: 10px; }
 .new-project-button { width: 100%; margin-top: 9px; padding: 8px 10px; border: 1px dashed #8d8d8d; background: transparent; color: #0f62fe; text-align: left; }
 .new-project-button:hover { border-color: #0f62fe; background: #edf5ff; }
+.project-actions { display: grid; grid-template-columns: 1fr 34px; gap: 5px; align-items: end; }
+.project-actions .new-project-button, .project-actions .more-wrap { margin-top: 9px; }
+.project-more { width: 34px; height: 34px; border: 1px solid #8d8d8d; background: #fff; }
+.project-actions .more-menu { left: auto; right: 0; min-width: 150px; }
+.project-actions .more-menu button:disabled { color: #a8a8a8; cursor: not-allowed; }
 #projectModal .modal-intro { margin: -10px 0 24px; color: #525252; }
 #projectModal textarea { display: block; width: 100%; margin-top: 7px; padding: 12px; resize: vertical; border: 0; border-bottom: 1px solid #8d8d8d; background: #f4f4f4; font: inherit; }
 .field-hint { display: block; margin-top: 5px; color: #6f6f6f; font-size: 11px; }
