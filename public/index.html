@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#161616" />
+  <meta name="description" content="Cadence turns live design operations data into trusted, traceable playbacks." />
+  <title>Cadence — Power Design Playbacks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/summary-cards.css?v=14" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#overview" aria-label="Cadence home"><span class="ibm-mark">IBM</span><span>Cadence</span></a>
+    <div class="top-actions">
+      <button class="icon-button" id="searchButton" aria-label="Search">⌕</button>
+      <button class="icon-button" id="helpButton" aria-label="Help">?</button>
+      <label class="role-switch"><span class="sr-only">Current profile</span><select id="roleSelect" aria-label="Current profile"><option value="admin">Admin profile</option><option value="user">User profile</option></select></label><button class="avatar" id="accountButton" aria-label="Account menu">AS</button>
+    </div>
+  </header>
+
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="project-switcher">
+      <label for="projectSelect">Project</label>
+      <select id="projectSelect" aria-label="Current project"></select><button class="new-project-button" type="button" data-action="new-project">＋ New project</button>
+    </div>
+    <nav>
+      <a href="#overview" data-route="overview" class="active"><span>⌂</span>Overview</a>
+      <a href="#reports" data-route="reports"><span>▤</span>Reports</a>
+      <a href="#versions" data-route="versions"><span>◇</span>Versions</a>
+      <a href="#metrics" data-route="metrics"><span>⌁</span>Metrics</a>
+      <a href="#connections" data-route="connections"><span>⇄</span>Connections</a>
+    </nav>
+    <nav class="side-bottom">
+      <a href="#settings" data-route="settings"><span>⚙</span>Settings</a>
+      <a href="#audit" data-route="audit"><span>◷</span>Audit log</a>
+    </nav>
+  </aside>
+
+  <main id="main" tabindex="-1">
+    <section class="view active" data-view="overview">
+      <div class="page-head">
+        <div><p class="eyebrow">Project overview</p><h1>Power HMC</h1><p class="subtitle">Your design operations, from live work to trusted story.</p></div>
+        <button class="button primary" data-action="create-report">Create report <span>＋</span></button>
+      </div>
+
+      <div class="status-banner"><span class="status-dot"></span><strong>Monday.com is healthy</strong><span>Last synced 2 minutes ago</span><button data-route-jump="connections">View connection</button></div>
+
+      <div class="section-heading"><div><h2>October at a glance</h2><p>Compared with September 2026</p></div><button class="button ghost" data-action="present">Present overview ↗</button></div>
+      <div class="kpi-grid" id="overviewKpis"></div>
+
+      <div class="two-col">
+        <article class="panel report-card">
+          <div class="panel-head"><div><p class="eyebrow">Current report</p><h2>October 2026 playback</h2></div><span class="tag draft">Draft</span></div>
+          <div class="progress-rail" aria-label="Report progress"><span class="done"></span><span class="done"></span><span class="current"></span><span></span></div>
+          <div class="progress-labels"><span>Synced</span><span>Story</span><span>Review</span><span>Publish</span></div>
+          <p class="report-insight">Delivery is moving, but review is now the largest queue. Four items need an owner decision before month close.</p>
+          <div class="report-actions"><button class="button primary" data-open-report="oct">Continue report</button><button class="button ghost" data-action="review">Request review</button></div>
+        </article>
+        <article class="panel activity-panel">
+          <div class="panel-head"><div><p class="eyebrow">Recent activity</p><h2>What changed</h2></div><button class="text-button" data-route-jump="audit">View all</button></div>
+          <ul class="activity-list">
+            <li><span class="activity-icon blue">⇄</span><div><strong>14 items synced</strong><p>Design Features · 11:42</p></div></li>
+            <li><span class="activity-icon purple">✦</span><div><strong>Story draft refreshed</strong><p>October playback · 10:18</p></div></li>
+            <li><span class="activity-icon green">✓</span><div><strong>September playback published</strong><p>By Anupam · 30 Sep</p></div></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section-heading compact"><div><h2>Reports</h2><p>Published snapshots and work in progress</p></div><button class="text-button" data-route-jump="reports">View all reports →</button></div>
+      <div class="report-row" id="recentReports"></div>
+    </section>
+
+    <section class="view" data-view="reports">
+      <div class="page-head"><div><p class="eyebrow">Reports</p><h1>Playbacks</h1><p class="subtitle">Monthly truth, quarterly context, yearly impact.</p></div><button class="button primary" data-action="create-report">Create report <span>＋</span></button></div>
+      <section class="analytics-section" aria-labelledby="analyticsTitle">
+        <div class="section-heading compact"><div><p class="eyebrow">Live portfolio totals</p><h2 id="analyticsTitle">Playback insights</h2><p>Automatically recalculated from every section, subsection, card, status, tag, and picture.</p></div><span class="analytics-live"><i></i> Live data</span></div>
+        <div id="analyticsDashboard" class="analytics-dashboard" aria-live="polite"></div>
+      </section>
+      <div class="toolbar"><div class="tabs" role="tablist"><button class="active" data-report-filter="all">All</button><button data-report-filter="month">Monthly</button><button data-report-filter="quarter">Quarterly</button><button data-report-filter="half">Half-yearly</button><button data-report-filter="year">Yearly</button></div><label class="search"><span>⌕</span><input id="reportSearch" placeholder="Search reports" /></label></div>
+      <div class="report-table-wrap"><table><thead><tr><th>Report</th><th>Cadence</th><th>Scope</th><th>Status</th><th>Updated</th><th></th></tr></thead><tbody id="reportTable"></tbody></table></div>
+    </section>
+
+    <section class="view" data-view="versions">
+      <div class="page-head"><div><p class="eyebrow">Versions</p><h1>Release scope</h1><p class="subtitle">The shared release vocabulary behind every report.</p></div><button class="button primary" data-action="add-version">Add version ＋</button></div>
+      <div class="version-grid" id="versionGrid"></div>
+    </section>
+
+    <section class="view" data-view="metrics">
+      <div class="page-head"><div><p class="eyebrow">KPI dictionary</p><h1>Metric definitions</h1><p class="subtitle">Every number has an owner, source, calculation, and roll-up rule.</p></div><button class="button primary" data-action="add-metric">New metric ＋</button></div>
+      <div class="metric-list" id="metricList"></div>
+    </section>
+
+    <section class="view" data-view="connections">
+      <div class="page-head"><div><p class="eyebrow">Connections</p><h1>Source systems</h1><p class="subtitle">Live data comes in. Cadence context stays here.</p></div><button class="button primary" data-action="connect">Add connection ＋</button></div>
+      <div class="connection-grid" id="connectionGrid"></div>
+    </section>
+
+    <section class="view" data-view="settings"><div class="page-head"><div><p class="eyebrow">Settings</p><h1>Project settings</h1><p class="subtitle">Manage ownership, access, and reporting defaults.</p></div></div><div class="settings-panel panel" id="settingsForm"></div></section>
+    <section class="view" data-view="audit"><div class="page-head"><div><p class="eyebrow">Audit log</p><h1>Every change, accounted for</h1><p class="subtitle">A permanent record of syncs, overrides, approvals, and publishing.</p></div></div><div class="timeline" id="auditTimeline"></div></section>
+
+    <section class="view playback-view" data-view="playback">
+      <div class="playback-toolbar"><button class="text-button" data-route-jump="reports">← Reports</button><div class="view-mode" aria-label="Playback mode"><button class="active" data-mode="edit">Edit</button><button data-mode="view">View</button><button data-action="present">Present</button></div><label class="playback-search"><span>⌕</span><input id="playbackSearch" type="search" placeholder="Search items or tags" aria-label="Search playback items"><button type="button" id="clearPlaybackSearch" aria-label="Clear search">×</button><small id="searchResultCount" aria-live="polite"></small></label><div class="admin-actions"><button class="button ghost" data-action="review">Request review</button><button class="button primary" data-action="publish">Publish</button></div></div>
+      <div class="playback-head"><div><p class="overline">OCT_2026 PLAYBACK</p><h1>Power HMC</h1><p>Monthly playback</p></div><div class="scope-card"><span>Release scope</span><strong>1121 · 1130 · 1131</strong><small>Synced 2 min ago</small></div></div>
+      <div class="authoring-bar"><div><strong>Playback content</strong><span>Drag cards to reorder or move them between columns.</span></div><div class="monthly-collapse-actions"><button class="button ghost" data-action="collapse-monthly">Collapse all</button><button class="button ghost" data-action="expand-monthly">Expand all</button><button class="button primary" data-crud="add-section">Add section ＋</button></div></div>
+      <div class="bulk-bar" id="bulkBar" hidden><strong id="bulkCount">0 selected</strong><div><button class="button ghost" id="bulkClear">Clear</button><button class="button ghost" id="bulkTag">Add tag</button><button class="button danger" id="bulkDelete">Delete selected</button></div></div>
+      <div id="playbackSections"></div>
+    </section>
+    <section class="view aggregate-report-view" data-view="aggregate-report"><div id="aggregateReportContent"></div></section>
+  </main>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="drillDrawer" aria-hidden="true" aria-label="KPI detail"><button class="drawer-close" aria-label="Close">×</button><div id="drawerContent"></div></aside>
+  <aside class="drawer card-detail-drawer" id="cardDetailDrawer" aria-hidden="true" aria-label="Card details"><button class="drawer-close card-detail-close" aria-label="Close card details">×</button><div id="cardDetailContent"></div></aside>
+  <div class="image-preview-backdrop" id="imagePreviewBackdrop"></div>
+  <aside class="image-preview-drawer" id="imagePreviewDrawer" aria-hidden="true" aria-label="Picture preview"><button class="image-preview-close" aria-label="Close picture preview">×</button><div id="imagePreviewContent"></div></aside>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="presentation"></div>
+  <section class="modal" id="createModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <button class="modal-close" aria-label="Close">×</button><p class="eyebrow">New report</p><h2 id="modalTitle">Create a playback</h2>
+    <form id="createForm"><label>Cadence<select name="cadence"><option value="month">Monthly</option><option value="quarter">Quarterly</option><option value="year">Yearly</option></select></label><label>Period<input name="period" type="month" value="2026-11" required /></label><fieldset><legend>Versions in scope</legend><label class="check"><input type="checkbox" checked value="1121" />1121</label><label class="check"><input type="checkbox" checked value="1130" />1130</label><label class="check"><input type="checkbox" checked value="1131" />1131</label></fieldset><label>Start from<select name="template"><option>October 2026 playback</option><option>Power HMC default</option><option>Blank report</option></select></label><div class="modal-actions"><button type="button" class="button ghost modal-cancel">Cancel</button><button class="button primary" type="submit">Create draft</button></div></form>
+  </section>
+  <section class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle" aria-hidden="true"><button class="modal-close project-close" aria-label="Close new project">×</button><p class="eyebrow">Workspace</p><h2 id="projectModalTitle">Create a new project</h2><p class="modal-intro">Start a separate project with its own playback content and reporting totals.</p><form id="projectForm"><label>Project name<input name="name" required maxlength="70" placeholder="Power Systems"></label><label>Short code<input name="code" required maxlength="12" placeholder="POWER" pattern="[A-Za-z0-9_-]+"><span class="field-hint">Letters, numbers, hyphens, and underscores</span></label><label>Description<textarea name="description" rows="3" maxlength="220" placeholder="What this project covers"></textarea></label><label>Start with<select name="template"><option value="blank">Blank project</option><option value="default">Cadence starter sections</option><option value="current">Copy current project</option></select></label><div class="modal-actions"><button type="button" class="button ghost project-cancel">Cancel</button><button class="button primary" type="submit">Create project</button></div></form></section>
+  <section class="modal editor-modal" id="editorModal" role="dialog" aria-modal="true" aria-labelledby="editorTitle" aria-hidden="true">
+    <button class="modal-close editor-close" aria-label="Close editor">×</button><p class="eyebrow" id="editorEyebrow">Content editor</p><h2 id="editorTitle">Edit content</h2>
+    <form id="editorForm"><input type="hidden" name="action"><input type="hidden" name="section"><input type="hidden" name="column"><input type="hidden" name="item">
+      <label id="editorPrimaryLabel">Title<input name="title" required maxlength="100"></label>
+      <label id="editorSecondaryLabel">Description<textarea name="description" rows="4" maxlength="400"></textarea></label>
+      <div id="editorStatusField" class="status-editor"><label>Status<select name="status" class="status-select"></select></label><div class="custom-status-compose"><input name="customStatusName" maxlength="30" placeholder="New custom status"><select name="customStatusColor" aria-label="Custom status color"><option value="gray">Gray</option><option value="blue">Blue</option><option value="green">Green</option><option value="red">Red</option><option value="yellow">Yellow</option><option value="purple">Purple</option><option value="teal">Teal</option></select><button type="button" class="button ghost" id="addCustomStatusEditor">Add status</button></div></div>
+      <div id="editorTagsLabel" class="tag-builder"><div class="tag-builder-label">Tags <span class="field-help">Add as many as needed</span></div><div class="tag-compose"><input name="tagName" maxlength="40" placeholder="Tag name"><select name="tagColor" aria-label="Tag color"><option value="blue">Blue</option><option value="purple">Purple</option><option value="green">Green</option><option value="teal">Teal</option><option value="magenta">Magenta</option><option value="red">Red</option><option value="orange">Orange</option><option value="gray">Gray</option></select><button type="button" class="button ghost" id="addTagButton">Add tag</button></div><div class="tag-preview" id="tagPreview" aria-live="polite"></div></div>
+      <div class="modal-actions"><button type="button" class="button ghost editor-cancel">Cancel</button><button class="button primary" type="submit">Save changes</button></div>
+    </form>
+  </section>
+  <section class="modal confirm-modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-hidden="true">
+    <p class="eyebrow">Confirm removal</p><h2 id="confirmTitle">Delete this content?</h2><p id="confirmMessage">This removes the selected content from this playback.</p><div class="modal-actions"><button type="button" class="button ghost confirm-cancel">Cancel</button><button class="button danger" id="confirmDelete">Delete</button></div>
+  </section>
+  <section class="modal bulk-tag-modal" id="bulkTagModal" role="dialog" aria-modal="true" aria-labelledby="bulkTagTitle" aria-hidden="true">
+    <button class="modal-close bulk-tag-close" aria-label="Close bulk tag editor">×</button><p class="eyebrow">Bulk action</p><h2 id="bulkTagTitle">Add tag to selected cards</h2><p id="bulkTagMessage">The tag will be added to every selected card.</p><form id="bulkTagForm"><div class="tag-compose"><input name="name" maxlength="40" placeholder="Tag name" required><select name="color" aria-label="Tag color"><option value="blue">Blue</option><option value="purple">Purple</option><option value="green">Green</option><option value="teal">Teal</option><option value="magenta">Magenta</option><option value="red">Red</option><option value="orange">Orange</option><option value="gray">Gray</option></select></div><div class="color-preview"><span class="tag-pill" data-color="blue" id="bulkTagPreview">Tag preview</span></div><div class="modal-actions"><button type="button" class="button ghost bulk-tag-cancel">Cancel</button><button class="button primary" type="submit">Add to selected</button></div></form>
+  </section>
+  <section class="modal" id="detailEditModal" role="dialog" aria-modal="true" aria-labelledby="detailEditTitle" aria-hidden="true"><button class="modal-close detail-edit-close" aria-label="Close detail editor">×</button><p class="eyebrow">Card details</p><h2 id="detailEditTitle">Edit card details</h2><form id="detailEditForm"><label>Title<input name="title" required maxlength="100"></label><label>Overview<textarea name="summary" rows="5" maxlength="900"></textarea></label><label>Supporting description<textarea name="secondary" rows="3" maxlength="600"></textarea></label><label>Status<select name="status" class="status-select"></select></label><div class="custom-status-compose"><input name="customStatusName" maxlength="30" placeholder="New custom status"><select name="customStatusColor" aria-label="Custom status color"><option value="gray">Gray</option><option value="blue">Blue</option><option value="green">Green</option><option value="red">Red</option><option value="yellow">Yellow</option><option value="purple">Purple</option><option value="teal">Teal</option></select><button type="button" class="button ghost" id="addCustomStatusDetail">Add status</button></div><label>Lifecycle stage<select name="stage"><option value="0">Discovery research</option><option value="1">Co-create</option><option value="2">Concept design</option><option value="3">Refinement and feedback</option><option value="4">Handoff and design audit</option><option value="5">Changes and edge cases</option><option value="6">Usability testing</option></select></label><div class="modal-actions"><button type="button" class="button ghost detail-edit-cancel">Cancel</button><button class="button primary" type="submit">Save details</button></div></form></section>
+  <section class="modal" id="summaryModal" role="dialog" aria-modal="true" aria-labelledby="summaryModalTitle" aria-hidden="true"><button class="modal-close summary-close" aria-label="Close summary editor">×</button><p class="eyebrow">Section summary</p><h2 id="summaryModalTitle">Add summary card</h2><form id="summaryForm"><input type="hidden" name="section"><input type="hidden" name="summary"><label>Label<input name="label" required maxlength="60" placeholder="Discovery sessions"></label><label>Value<input name="value" required maxlength="16" placeholder="30+"></label><label>Icon<select name="icon"><option value="⌕">Search</option><option value="▣">Screens</option><option value="◇">Insight</option><option value="✦">Highlight</option><option value="△">Risk</option><option value="↗">Progress</option><option value="◫">Items</option><option value="◎">Sessions</option></select></label><label>Supporting note<input name="note" maxlength="80" placeholder="Optional context"></label><div class="modal-actions"><button type="button" class="button ghost summary-cancel">Cancel</button><button class="button primary" type="submit">Save summary</button></div></form></section>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="presentation" id="presentation" aria-hidden="true"><button class="present-exit" data-action="exit-present">Exit presentation ×</button><div id="presentContent"></div><div class="present-controls"><button data-action="prev-slide">←</button><span id="slideCount">1 / 5</span><button data-action="next-slide">→</button></div></div>
+  <script src="/app.js?v=14"></script>
+</body>
+</html>
