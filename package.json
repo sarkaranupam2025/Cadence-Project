@@ -1,0 +1,13 @@
+{
+  "name": "cadence-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "node --check public/app.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.43.0"
+  }
+}
